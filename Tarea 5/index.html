@@ -1,0 +1,283 @@
+<!doctype html>
+<html>
+<head>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<title>Datos</title>
+</head>
+
+<body>
+
+	
+	<meta charset='utf-8'>
+	<link rel="stylesheet" href="main.css" type="text/css" media="all">
+	<script src="capture.js">
+	</script>
+	
+	<style>
+
+
+
+
+html
+
+.table{
+background: #58FA58;
+opacity: 0.8;
+
+}
+   
+   .botonimagen{
+  background-image:url(imagenes/default.png);
+  background-repeat:no-repeat;
+  height:27px;
+  width:27px;
+  background-position:center;
+}
+   
+ 
+   
+   
+      #btnAgregar{
+   background:#58FA58;
+   opacity: 0.8;
+   }
+   
+   
+   
+
+
+	body { 
+	background-image: url("imagenes/fondo.jpg")
+	
+	}
+	
+</style>
+
+
+
+
+
+
+<div>
+
+<div class="row col-md-offset-1">
+<h2 color= "white" style="font-family:'times new roman'"><font color= "white"><b><i> Registra tus datos </font></i></b> </h2>
+</div>	
+</br>
+
+<div class="row">
+<div class="col-md-3 col-md-offset-1">
+<div class="input-group" style="margin:5px;">
+<span class="input-group-addon" style="min-width:100px; width:100px; max-width:100px;"><i><b>Cedula</b></i></span>
+<input type="text" placeholder="Cedula" style="min-width:22px;" class="form-control" id="txtCedula" >
+</div>
+
+
+<div class="input-group" style="margin:5px;">
+<span class="input-group-addon" style="min-width:10px; width:100px; max-width:100px;" ><i><b>Nombre</b></i></span>
+<input type="text" placeholder="Nombre" style="min-width:10px;" class="form-control" id="txtNombre" >
+</div>
+
+
+<div class="input-group" style="margin:5px;">
+<span class="input-group-addon" style="min-width:10px; width:100px; max-width:100px;" ><i><b>Apellido</b></i></span>
+<input type="text" placeholder="Apellido" style="min-width:10px;" class="form-control" id="txtApellido" >
+</div>
+
+
+<div class="input-group" style="margin:5px;">
+<span class="input-group-addon" style="min-width:10px; width:100px; max-width:100px;" ><i><b>Telefono</b></i></span>
+<input type="text" placeholder="Telefono" style="min-width:10px;" class="form-control" id="txtTelefono" >
+
+</div>
+
+
+<center>
+<button onclick= "agregarAuto();" type="button" class="btn" style="margin:5px; width:100px; margin-left:5px;" id="btnAgregar"  ><h4 style="font-family:'times new roman'"><i><b>Agregar</b></i></h4></button>
+	
+</div>
+ </center>
+
+<center>
+      
+      <div class="col-md-7 col-md-offset-0"  id="divdata">
+	  
+
+          <thead>
+            <tr>
+			
+    <div class="col-md-5 col-md-offset-0">
+    <video id="video">Video stream not available.</video>
+    <button id="startbutton">Tomar photo</button> 
+  </div>
+  <canvas id="canvas">
+  
+  </canvas>
+    <img id="photo" alt="The screen capture will appear in this box."> 
+	
+
+            </tr>
+          </tbody>
+		  
+        
+      </div>
+    </div>
+	</div>
+    <br/>
+
+</center>
+
+  <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h2 style="font-family:'times new roman'"><b><i><font color= "white">Registros Realizados</font></i></b></h2>
+        <table class="table table-bordered" id="tablee">
+          <thead>
+            <tr>
+              <td><h4 style="font-family:'times new roman'"><b><i>Cedula</i></b></h4></td>
+              <td><h4 style="font-family:'times new roman'"><b><i>Nombre</i></b></h4></td>
+              <td><h4 style="font-family:'times new roman'"><b><i>Apellido</i></b></h4></td>
+              <td><h4 style="font-family:'times new roman'"><b><i>Telefono</i></b></h4></td>
+			  <td></td>
+			  
+                            <td><h4 style="font-family:'times new roman'"><b><i>Foto</i></b></h4></td>
+							
+			  
+            </tr>
+          </thead>
+          <tbody id="tbDatos">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+   <script>
+   
+   
+   var Registros= [] ;
+   
+
+function limpiarRegistro(){
+document.getElementById('txtCedula').value= '';
+document.getElementById('txtNombre').value= '';
+document.getElementById('txtApellido').value= '';
+document.getElementById('txtTelefono').value= '';
+}
+   
+   function dce (e){
+return document.createElement(e);
+}
+   
+   function guardarDatos(){
+datos= JSON.stringify(Registros);
+localStorage.setItem('Registros', datos);
+}
+
+function agregarAuto(){
+registro= [];
+registro.push (document.getElementById('txtCedula').value);
+registro.push (document.getElementById('txtNombre').value);
+registro.push (document.getElementById('txtApellido').value);
+registro.push (document.getElementById('txtTelefono').value);
+correcto= true;
+for(x= 0; x< registro.length; x++){
+if(registro[x] == ""){
+correcto = false;
+}
+}
+if(correcto){
+Registros.push(registro);
+datos= JSON.stringify(Registros);
+localStorage.setItem('Registros', datos);
+limpiarRegistro();
+mostrarDatos();
+}
+else{
+alert ("Debe llenar todos los campos correctamente");
+}
+}
+
+function mostrarDatos () {
+
+destino= document.getElementById('tbDatos');
+
+destino.innerHTML= "";
+
+for(x=0; x < Registros.length; x++){
+tr= document.createElement('tr');
+registro = Registros[x];
+
+tr= dce('tr');
+tr.setAttribute('indice', x);
+
+for(z= 0; z < registro.length; z++){
+dato= registro[z];
+td= document.createElement('td');
+td.innerHTML = dato;
+tr.appendChild(td);
+
+}
+
+td= dce('td');
+btn = dce('button');
+btn.innerHTML= 'X' ;
+btn.setAttribute('onclick', 'borrarFila(this)');
+td.appendChild(btn);
+tr.appendChild(td);
+
+destino.appendChild(tr);
+
+td= dce('td');
+btn = dce('button');
+btn.innerHTML= '<input type="button" class="botonimagen" />' ;
+
+td.appendChild(btn);
+tr.appendChild(td);
+
+destino.appendChild(tr);
+
+}
+ }
+ 
+ dato= localStorage.getItem('Registros');
+if (dato != null){
+Registros= JSON.parse(dato);
+mostrarDatos ();
+
+function borrarFila (btn){
+
+tr= btn.parentNode.parentNode;
+tr.setAttribute('class', 'borrar');
+if(confirm('Seguro que desea eliminar la fila seleccionada')){
+indice= tr.getAttribute('indice');
+tarr= [];
+for(x=0; x< Registros.length; x++){
+if(x!=indice){
+tarr.push(Registros[x]);
+}
+}
+Registros= tarr;
+tr.parentNode.removeChild(tr);
+guardarDatos();
+}
+tr.setAttribute('class', '');
+
+}
+
+}
+
+
+   
+   </script>
+ 
+ 
+</body>
+</html>
+
